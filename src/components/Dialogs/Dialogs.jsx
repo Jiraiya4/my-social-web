@@ -7,16 +7,16 @@ const Dialogs = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <Dialog id="1" name="Dima"></Dialog>
-                <Dialog id="2" name="Juli"></Dialog>
-                <Dialog id="3" name="Mark"></Dialog>
-                <Dialog id="4" name="Vasilisa"></Dialog>
-                <Dialog id="5" name="Olivia"></Dialog>
+                <Dialog name={props.dialogs[0].name} id={props.dialogs[0].id}></Dialog>
+                <Dialog name={props.dialogs[1].name} id={props.dialogs[1].id}></Dialog>
+                <Dialog name={props.dialogs[2].name} id={props.dialogs[2].id}></Dialog>
+                <Dialog name={props.dialogs[3].name} id={props.dialogs[3].id}></Dialog>
+                <Dialog name={props.dialogs[4].name} id={props.dialogs[4].id}></Dialog>
             </div>
             <div className={s.messages}>
-                <Message text="Hello"></Message>
-                <Message text="How are you?"></Message>
-                <Message text="I love you"></Message>
+                <Message message={props.messages[0].message}></Message>
+                <Message message={props.messages[1].message}></Message>
+                <Message message={props.messages[2].message}></Message>
             </div>
         </div>
     );
