@@ -1,7 +1,17 @@
+.dialog {
+    margin-bottom: 10px;
+}
+
 .dialog a{
     text-decoration: none;
 }
 
 .dialog a.active{
     color: yellow;
+}
+
+.dialog img {
+    width: 20px;
+    float: left;
+    margin-right: 5px;
 }

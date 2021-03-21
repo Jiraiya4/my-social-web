@@ -2,22 +2,29 @@ import s from "./Dialogs.module.css"
 import { NavLink } from 'react-router-dom';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import React from 'react';
 
 const Dialogs = (props) => {
+    
+    let dialogsItems = props.state.dialogs.map( dialog => <Dialog name={dialog.name} id={dialog.id} avatar={dialog.avatar}/>) 
+    let messagesItems = props.state.messages.map( message => <Message message={message.message} />)
+
+    let textAreaRef = React.createRef();
+    let writeMess = () => {
+        let mess = textAreaRef.current.value;
+        alert(mess);
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <Dialog name={props.state.dialogs[0].name} id={props.state.dialogs[0].id}></Dialog>
-                <Dialog name={props.state.dialogs[1].name} id={props.state.dialogs[1].id}></Dialog>
-                <Dialog name={props.state.dialogs[2].name} id={props.state.dialogs[2].id}></Dialog>
-                <Dialog name={props.state.dialogs[3].name} id={props.state.dialogs[3].id}></Dialog>
-                <Dialog name={props.state.dialogs[4].name} id={props.state.dialogs[4].id}></Dialog>
+                {dialogsItems}
             </div>
             <div className={s.messages}>
-                <Message message={props.state.messages[0].message}></Message>
-                <Message message={props.state.messages[1].message}></Message>
-                <Message message={props.state.messages[2].message}></Message>
+                {messagesItems}
             </div>
+            <textarea ref={textAreaRef}></textarea>
+            <button onClick={writeMess}>Write</button>
         </div>
     );
 }

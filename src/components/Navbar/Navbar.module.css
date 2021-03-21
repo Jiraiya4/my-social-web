@@ -12,3 +12,9 @@
 .item a.active {
     color: yellow;
 }
+
+.friends{
+    color: white;
+    font-size: 20px;
+    margin: 15px 0;
+}
