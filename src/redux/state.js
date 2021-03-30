@@ -20,7 +20,8 @@ let state = {
             { id: 1, message: 'First post!', likes: 11 },
             { id: 2, message: 'Second post!', likes: 22 },
             { id: 3, message: 'Third post!', likes: 33 }
-        ]
+        ],
+        newPostText: ''
     },
     sideBarData: {
         friends : [
@@ -31,14 +32,22 @@ let state = {
     }
 }
 
-let addPost = (postText) => {
+window.state = state;
+
+let addPost = () => {
     let newPost = {
         id: 4,
-        message : postText,
+        message : state.profilePage.newPostText,
         likes: 0
     }
     state.profilePage.posts.push(newPost);
-    rerenderEntireTree(state, addPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state, addPost, changePostText);
 }
 
-export { state, addPost };
+let changePostText = (postText) => {
+    state.profilePage.newPostText = postText;
+    rerenderEntireTree(state, addPost, changePostText);
+}
+
+export { state, addPost, changePostText };
