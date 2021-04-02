@@ -3,16 +3,20 @@ import { NavLink } from 'react-router-dom';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from 'react';
+import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/state';
 
 const Dialogs = (props) => {
     
     let dialogsItems = props.state.dialogs.map( dialog => <Dialog name={dialog.name} id={dialog.id} avatar={dialog.avatar}/>) 
     let messagesItems = props.state.messages.map( message => <Message message={message.message} />)
 
-    let textAreaRef = React.createRef();
-    let writeMess = () => {
-        let mess = textAreaRef.current.value;
-        alert(mess);
+    let updateNewMessageBody = (e) =>{
+        let newMessageBody = e.target.value;
+        props.dispatch(updateNewMessageBodyCreator(newMessageBody))
+    }
+
+    let sendMessage = () => {
+        props.dispatch(sendMessageCreator());
     }
 
     return (
@@ -23,8 +27,8 @@ const Dialogs = (props) => {
             <div className={s.messages}>
                 {messagesItems}
             </div>
-            <textarea ref={textAreaRef}></textarea>
-            <button onClick={writeMess}>Write</button>
+            <textarea onChange={updateNewMessageBody} value={props.state.newMessageBody} placeholder='Enter your message'></textarea>
+            <button onClick={sendMessage}>Send</button>
         </div>
     );
 }
