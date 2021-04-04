@@ -3,20 +3,19 @@ import { NavLink } from 'react-router-dom';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from 'react';
-import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogsPageReducer';
 
 const Dialogs = (props) => {
     
-    let dialogsItems = props.state.dialogs.map( dialog => <Dialog name={dialog.name} id={dialog.id} avatar={dialog.avatar}/>) 
-    let messagesItems = props.state.messages.map( message => <Message message={message.message} />)
+    let dialogsItems = props.dialogs.map( dialog => <Dialog name={dialog.name} id={dialog.id} avatar={dialog.avatar}/>) 
+    let messagesItems = props.messages.map( message => <Message message={message.message} />)
 
-    let updateNewMessageBody = (e) =>{
+    let onUpdateNewMessageBody = (e) =>{
         let newMessageBody = e.target.value;
-        props.dispatch(updateNewMessageBodyCreator(newMessageBody))
+        props.updateNewMessageBody(newMessageBody)
     }
 
-    let sendMessage = () => {
-        props.dispatch(sendMessageCreator());
+    let onSendMessage = () => {
+        props.sendMessage();
     }
 
     return (
@@ -27,8 +26,8 @@ const Dialogs = (props) => {
             <div className={s.messages}>
                 {messagesItems}
             </div>
-            <textarea onChange={updateNewMessageBody} value={props.state.newMessageBody} placeholder='Enter your message'></textarea>
-            <button onClick={sendMessage}>Send</button>
+            <textarea onChange={onUpdateNewMessageBody} value={props.newMessageBody} placeholder='Enter your message'></textarea>
+            <button onClick={onSendMessage}>Send</button>
         </div>
     );
 }

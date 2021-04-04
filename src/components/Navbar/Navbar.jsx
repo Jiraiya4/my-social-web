@@ -25,7 +25,7 @@ const Navbar = (props) => {
                 <NavLink to="/friends">Friends</NavLink>
             </div>
             
-            <sideBar friends={props.state.friends} />
+            <sideBar friends={props.store.getState().sideBar.friends} />
         </nav>
     );
 }
