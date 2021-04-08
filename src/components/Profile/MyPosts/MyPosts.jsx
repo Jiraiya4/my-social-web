@@ -3,7 +3,7 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-    let postsItems = props.posts.map( post => <Post message={post.message} likes={post.likes} />)
+    let postsItems = props.profilePage.posts.map( post => <Post key={post.id} message={post.message} likes={post.likes} />)
 
     let onChangePostText = (e) => {
         let text = e.target.value;
@@ -19,7 +19,7 @@ const MyPosts = (props) => {
             <h3>My posts</h3>
             <div className={s.postAdd}>
                 <div>
-                    <textarea onChange={onChangePostText} value={props.newPostText}/>
+                    <textarea onChange={onChangePostText} value={props.profilePage.newPostText}/>
                 </div>
                 <div>
                     <button onClick={onAddPost}>Add post</button>

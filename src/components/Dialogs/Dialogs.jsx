@@ -6,8 +6,8 @@ import React from 'react';
 
 const Dialogs = (props) => {
     
-    let dialogsItems = props.dialogs.map( dialog => <Dialog name={dialog.name} id={dialog.id} avatar={dialog.avatar}/>) 
-    let messagesItems = props.messages.map( message => <Message message={message.message} />)
+    let dialogsItems = props.dialogsPage.dialogs.map( dialog => <Dialog key={dialog.id} name={dialog.name} id={dialog.id} avatar={dialog.avatar}/>) 
+    let messagesItems = props.dialogsPage.messages.map( message => <Message key={message.id} message={message.message} />)
 
     let onUpdateNewMessageBody = (e) =>{
         let newMessageBody = e.target.value;
@@ -26,7 +26,7 @@ const Dialogs = (props) => {
             <div className={s.messages}>
                 {messagesItems}
             </div>
-            <textarea onChange={onUpdateNewMessageBody} value={props.newMessageBody} placeholder='Enter your message'></textarea>
+            <textarea onChange={onUpdateNewMessageBody} value={props.dialogsPage.newMessageBody} placeholder='Enter your message'></textarea>
             <button onClick={onSendMessage}>Send</button>
         </div>
     );

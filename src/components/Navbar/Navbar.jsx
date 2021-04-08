@@ -24,8 +24,6 @@ const Navbar = (props) => {
             <div className={`${s.item} ${s.friends}`}>
                 <NavLink to="/friends">Friends</NavLink>
             </div>
-            
-            <sideBar friends={props.store.getState().sideBar.friends} />
         </nav>
     );
 }
