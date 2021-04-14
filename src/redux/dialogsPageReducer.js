@@ -38,7 +38,7 @@ const dialogsPageReducer = (state = initialState, action) => {
         }
     }
 
-export const sendMessageCreator = () => ({type: SEND_MESSAGE});
-export const updateNewMessageBodyCreator = (newMessage) => ({type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: newMessage});
+export const sendMessage = () => ({type: SEND_MESSAGE});
+export const updateNewMessageBody = (newMessage) => ({type: UPDATE_NEW_MESSAGE_BODY, newMessageBody: newMessage});
 
 export default dialogsPageReducer;

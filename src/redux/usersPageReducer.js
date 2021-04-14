@@ -2,7 +2,7 @@ const FOLLOW_USER = 'FOLLOW-USER';
 const UNFOLLOW_USER = 'UNFOLLOW-USER';
 const SHOW_MORE_USERS = 'SHOW-MORE-USERS';
 const SELETC_PAGE = 'SELETC_PAGE';
-const ASSING_TOTAL_COUNT = 'ASSING_TOTAL_COUNT';
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const TOGGLE_ISFATCHING = 'TOGGLE_ISFATCHING';
 
 let initialState = {
@@ -48,7 +48,7 @@ const usersPageReducer = (state = initialState, action) => {
                 selectedPage: action.pageNumber
             }
         }
-        case ASSING_TOTAL_COUNT: {
+        case SET_TOTAL_COUNT: {
             return {
                 ...state,
                 totalCount: action.totalCount
@@ -65,11 +65,11 @@ const usersPageReducer = (state = initialState, action) => {
     }
 }
 
-export const followUserAC = (userId) => ({ type: FOLLOW_USER, userId});
-export const unfollowUserAC = (userId) => ({ type: UNFOLLOW_USER, userId});
-export const showMoreUsersAC = (users) => ({ type: SHOW_MORE_USERS, users });
-export const selectPageAC = (pageNumber) =>({ type: SELETC_PAGE, pageNumber });
-export const assignTotalCountAC = (totalCount) => ({ type: ASSING_TOTAL_COUNT, totalCount });
-export const toggleIsFatchingAC = (isFatching) => ({ type: TOGGLE_ISFATCHING, isFatching });
+export const followUser = (userId) => ({ type: FOLLOW_USER, userId});
+export const unfollowUser = (userId) => ({ type: UNFOLLOW_USER, userId});
+export const showMoreUsers = (users) => ({ type: SHOW_MORE_USERS, users });
+export const selectPage = (pageNumber) =>({ type: SELETC_PAGE, pageNumber });
+export const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount });
+export const toggleIsFatching = (isFatching) => ({ type: TOGGLE_ISFATCHING, isFatching });
 
 export default usersPageReducer;

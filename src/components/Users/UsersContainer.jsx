@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {followUserAC, unfollowUserAC, showMoreUsersAC, selectPageAC, assignTotalCountAC, toggleIsFatchingAC} from '../../redux/usersPageReducer';
+import {followUser, unfollowUser, showMoreUsers, selectPage, setTotalCount, toggleIsFatching} from '../../redux/usersPageReducer';
 import Users from './Users';
 import React from 'react';
 import * as axios from 'axios';
@@ -11,7 +11,7 @@ class UsersContainer extends React.Component {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`).then(response => {
             this.props.toggleIsFatching(false);
             this.props.showMoreUsers(response.data.items);
-            this.props.assignTotalCount(response.data.totalCount);
+            this.props.setTotalCount(response.data.totalCount);
         })
     }
     onSelectPage = (pageNumber) => {
@@ -31,8 +31,7 @@ class UsersContainer extends React.Component {
                         onSelectPage={this.onSelectPage}
                         unfollowUser={this.props.unfollowUser}
                         followUser={this.props.followUser}
-                />}
-                
+                />}               
                 </>
     }
 }
@@ -47,27 +46,6 @@ let mapStateToProps = state => {
     }
 }
 
-let mapDispatchToProps = dispatch => {
-    return {
-        followUser: (userId) => {
-            dispatch(followUserAC(userId));
-        },
-        unfollowUser: (userId) => {
-            dispatch(unfollowUserAC(userId));
-        },
-        showMoreUsers: (users) => {
-            dispatch(showMoreUsersAC(users));
-        },
-        selectPage: (pageNumber) => {
-            dispatch(selectPageAC(pageNumber));
-        },
-        assignTotalCount: (totalCount) =>{
-            dispatch(assignTotalCountAC(totalCount));
-        },
-        toggleIsFatching: (isFatching) => {
-            dispatch(toggleIsFatchingAC(isFatching));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    followUser, unfollowUser, showMoreUsers, selectPage, setTotalCount, toggleIsFatching
+})(UsersContainer);
