@@ -4,22 +4,25 @@ import Users from './Users';
 import React from 'react';
 import * as axios from 'axios';
 import Preloader from '../common/Preloader/Preloader';
+import { userAPI } from '../../api/api';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFatching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        userAPI.getUsers(this.props.selectedPage, this.props.pageSize)
+        .then(data => {
             this.props.toggleIsFatching(false);
-            this.props.showMoreUsers(response.data.items);
-            this.props.setTotalCount(response.data.totalCount);
+            this.props.showMoreUsers(data.items);
+            this.props.setTotalCount(data.totalCount);
         })
     }
     onSelectPage = (pageNumber) => {
         this.props.toggleIsFatching(true);
         this.props.selectPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        userAPI.getUsers(pageNumber, this.props.pageSize)
+        .then(data => {
             this.props.toggleIsFatching(false);
-            this.props.showMoreUsers(response.data.items);
+            this.props.showMoreUsers(data.items);
         })
     }
     render() {
