@@ -8,7 +8,7 @@ import Preloader from '../common/Preloader/Preloader';
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFatching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.selectedPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.toggleIsFatching(false);
             this.props.showMoreUsers(response.data.items);
             this.props.setTotalCount(response.data.totalCount);
@@ -17,7 +17,7 @@ class UsersContainer extends React.Component {
     onSelectPage = (pageNumber) => {
         this.props.toggleIsFatching(true);
         this.props.selectPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.toggleIsFatching(false);
             this.props.showMoreUsers(response.data.items);
         })

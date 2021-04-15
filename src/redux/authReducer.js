@@ -1,6 +1,7 @@
 const SET_USER_DATA = 'SET_USER_DATA';
 
 let initialState = {
+    //look doc. of API
     login: null,
     email: null,
     userId: null,

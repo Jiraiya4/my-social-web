@@ -15,7 +15,7 @@ let initialState = {
 
 const usersPageReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW_USER:
+        case FOLLOW_USER: 
             return {
                 ...state,
                 users: state.users.map(u => {
