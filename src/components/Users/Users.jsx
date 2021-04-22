@@ -7,28 +7,10 @@ import { userAPI } from '../../api/api';
 //import User from './User/User'
 
 let Users = props => {
-    let pagesCount = Math.ceil((props.totalCount - 11459) / props.pageSize);
+    let pagesCount = Math.ceil((props.totalCount - 11659) / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
-    }
-
-    let onFollow = (userId) => {
-        userAPI.followUser(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    props.followUser(userId);
-                }
-            })
-    }
-
-    let onUnFollow = (userId) => {
-        userAPI.unFollowUser(userId)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    props.unfollowUser(userId);
-                }
-            })
     }
 
     return (
@@ -51,8 +33,8 @@ let Users = props => {
                             </div>
                             <div>
                                 {u.followed
-                                    ? <button onClick={() => onUnFollow(u.id)}>Unfollow</button>
-                                    : <button onClick={() => onFollow(u.id)}>Follow</button>
+                                    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.onUnFollow(u.id)}>Unfollow</button>
+                                    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.onFollow(u.id)}>Follow</button>
                                 }
                             </div>
                         </span>
