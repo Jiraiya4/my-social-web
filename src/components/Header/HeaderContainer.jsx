@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from './Header';
-import * as axios from 'axios';
 import { userAuth } from '../../redux/authReducer';
 import { connect } from 'react-redux';
-import { authAPI } from '../../api/api';
+import { withAuthRedirect } from '../hoc/AuthRedirect';
+import { compose } from 'redux';
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
@@ -25,4 +25,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { userAuth })(HeaderContainer);
+export default compose (
+    connect(mapStateToProps, {userAuth}),
+    //withAuthRedirect
+)(HeaderContainer)
