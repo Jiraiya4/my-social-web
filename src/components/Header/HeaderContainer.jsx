@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import { userAuth } from '../../redux/authReducer';
 import { connect } from 'react-redux';
-import { withAuthRedirect } from '../hoc/AuthRedirect';
+import { withAuthRedirect } from '../../hoc/AuthRedirect';
 import { compose } from 'redux';
 
 class HeaderContainer extends React.Component {

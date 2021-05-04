@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from 'react';
-import { Field, reduxForm } from "redux-form";
+import { AddMessageReduxForm } from "../../forms/AddMessageReduxForm";
 
 const Dialogs = (props) => {
     
@@ -12,7 +12,6 @@ const Dialogs = (props) => {
     
     let onSendMessage = (values) => {
         props.sendMessage(values.newMessageBody);
-        values.newMessageBody = '';
     }
     
     return (
@@ -27,20 +26,5 @@ const Dialogs = (props) => {
         </div>
     );
 }
-
-const AddMessageForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component="textarea" name="newMessageBody" placeholder="Enter your message" />
-            </div>
-            <div>
-                <button>Send</button>
-            </div>
-        </form>
-    )
-}
-
-const AddMessageReduxForm = reduxForm({ form: 'addMessage' })(AddMessageForm);
 
 export default Dialogs;
