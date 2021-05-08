@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
-import {followUser, unfollowUser, selectPage, getUsers} from '../../redux/usersPageReducer';
+import {followUser, unfollowUser, selectPage, requestUsers} from '../../redux/usersPageReducer';
 import Users from './Users';
 import React from 'react';
 import Preloader from '../common/Preloader/Preloader';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/AuthRedirect';
+import { getFollowingInProgress, getIsFatching, getPageSize, getSelectedPage, getTotalCount, getUsers } from '../../redux/Selectors/usersSelector';
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.getUsers(this.props.selectPage, this.props.pageSize);
+        this.props.requestUsers(this.props.selectPage, this.props.pageSize);
     }
     onSelectPage = (pageNumber) => {
         this.props.selectPage(pageNumber, this.props.pageSize);
@@ -37,16 +38,16 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = state => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        selectedPage: state.usersPage.selectedPage,
-        isFatching: state.usersPage.isFatching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        selectedPage: getSelectedPage(state),
+        isFatching: getIsFatching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {followUser, unfollowUser, selectPage, getUsers}),
-    withAuthRedirect
+    connect(mapStateToProps, {followUser, unfollowUser, selectPage, requestUsers}),
+    //withAuthRedirect
 )(UsersContainer)

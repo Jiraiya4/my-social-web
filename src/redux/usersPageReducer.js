@@ -83,10 +83,10 @@ export const setTotalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCoun
 export const toggleIsFatching = (isFatching) => ({ type: TOGGLE_ISFATCHING, isFatching });
 export const toggleFollowingInProgress = (isFatching, userId) => ({ type: TOGGLE_FOLLOWING_IN_PROGRESS, isFatching, userId});
 
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = () => {
     return (dispatch) => {
         dispatch(toggleIsFatching(true));
-        userAPI.getUsers()
+        userAPI.requestUsers()
         .then(data => {
             dispatch(toggleIsFatching(false));
             dispatch(showMoreUsers(data.items));
@@ -99,7 +99,7 @@ export const selectPage = (pageNumber, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFatching(true));
         dispatch(setCurrentPage(pageNumber));
-        userAPI.getUsers(pageNumber, pageSize)
+        userAPI.requestUsers(pageNumber, pageSize)
         .then(data => {
             dispatch(toggleIsFatching(false));
             dispatch(showMoreUsers(data.items));

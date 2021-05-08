@@ -4,6 +4,7 @@ import { userAuth, userLogout } from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/AuthRedirect';
 import { compose } from 'redux';
+import { getIsAuth, getLogin } from '../../redux/Selectors/headerSelector';
 
 class HeaderContainer extends React.Component {
     onLogout = () => {
@@ -19,8 +20,8 @@ class HeaderContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
-        login: state.auth.login
+        isAuth: getIsAuth(state),
+        login: getLogin(state)
         //auth: state.auth
     }
 }

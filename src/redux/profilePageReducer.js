@@ -45,17 +45,17 @@ export const addPost = (newPostText) => ({ type: ADD_POST, newPostText });
 export const setProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status });
 
-export const getProfile = (userId) => {
+export const requestProfile = (userId) => {
     return (dispatch) => {
-        profileAPI.getProfileInfo(userId)
+        profileAPI.requestProfileInfo(userId)
             .then(data => {
                 dispatch(setProfile(data));
             })
     }
 }
 
-export const getUserStatus = (userId) => (dispatch) => {
-    profileAPI.getUserStatus(userId)
+export const requestUserstatus = (userId) => (dispatch) => {
+    profileAPI.requestUserstatus(userId)
         .then(status =>
             dispatch(setUserStatus(status.data)))
 }

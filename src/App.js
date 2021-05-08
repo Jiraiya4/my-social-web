@@ -12,16 +12,20 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
-import { userAuth } from './redux/authReducer';
+import { initializeApp } from './redux/appReducer';
 import { compose } from 'redux';
-
+import Preloader from './components/common/Preloader/Preloader';
+import { getInitialized } from './redux/Selectors/appSelector';
 class App extends React.Component {
 
   componentDidMount() {
-    this.props.userAuth();
+    this.props.initializeApp();
   }
 
   render() {
+    if(!this.props.initialized) {
+      return <Preloader />
+    }
     return (
       <div className="app-wrapper">
         <HeaderContainer />
@@ -43,7 +47,11 @@ class App extends React.Component {
   }
 }
 
+let mapStateToProps = state => ({
+  initialized: getInitialized(state)
+})
+
 export default compose(
   withRouter,
-  connect(null, {userAuth})
+  connect(mapStateToProps, {initializeApp})
 )(App)

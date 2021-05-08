@@ -1,4 +1,4 @@
-import { reduxForm, Field, createField } from 'redux-form'
+import { reduxForm, Field} from 'redux-form'
 import { Input } from '../components/common/FormsControls/FormsControls'
 import { maxLengthCreator, required } from "../utils/validators/validators";
 import styles from "../components/common/FormsControls/FormsControls.module.css"
@@ -17,7 +17,6 @@ const LoginForm = (props) => {
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input} validate={[required, maxLength10]} /> remember me
             </div>
-
             {props.captchaUrl && <img src={props.captchaUrl} width='150' height='200'/>}
             {props.captchaUrl && <Field placeholder={"Symbols from image"} name={"captcha"} component={Input} validate={[required]}/>}
 

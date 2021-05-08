@@ -4,10 +4,11 @@ import {sendMessage} from '../../redux/dialogsPageReducer';
 import { connect } from "react-redux";
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/AuthRedirect';
+import { getDialogsPage } from "../../redux/Selectors/dialogsSelector";
 
 let mapStateToProps = state => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: getDialogsPage(state)
     }
 }
 
