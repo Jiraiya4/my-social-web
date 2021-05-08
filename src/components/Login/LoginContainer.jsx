@@ -7,19 +7,24 @@ import Login from './Login';
 
 class LoginContainer extends React.Component{
     componentDidMount(){
+        
+    }
 
+    onSubmit = (formData) => {
+        this.props.userLogin(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     render(){
         return (
-            <Login {...this.props} userLogin={userLogin}/>
+            <Login {...this.props} onSubmit={this.onSubmit}/>
         )
     }
 }
 
 let mapStateToProps = (state) => {
     return {
-
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 
